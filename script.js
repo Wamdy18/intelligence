@@ -233,36 +233,36 @@ priceInputBtn.addEventListener('click', () => {
 	price = priceInput.value;
 	price = Number(price);
 	
-	priceDiv.classList.add('display-none');
-	markDiv.classList.remove('display-none');
-
-	// for (let i = 0; i < data.length; i++) {
-	// 	if (price > data[i].price) {
-	// 		result.push(data[i]);
-	// 	}
-	// }
-	// if (result.length != 0) {
-	// 	for (let j = 0; j < result.length; j++) {
-	// 	if (result.length > 0 && result[j].price > maxPrice) {
-	// 		maxPrice = result[j].price;
-	// 	}
-	// }
-	
-	// let actualCar = result.find((el) => el.price === maxPrice);
-
-	// card.querySelector('img').src = `${actualCar.image}`;
-	// card.querySelector('h1').textContent = `${actualCar.mark} ${actualCar.model}`;
-	// card.querySelector('p').textContent = `Тип кузова: ${actualCar.carcaseType}`;
-	// priceRef = actualCar.price.toString().replace(/\B(?=(?:\d{3})*$)/g, ' ') + " рублей";
-	// card.querySelector('h3').textContent = `Цена: ${priceRef}`;
-
 	// priceDiv.classList.add('display-none');
-	// cardContainer.classList.remove('display-none');
+	// markDiv.classList.remove('display-none');
+
+	for (let i = 0; i < data.length; i++) {
+		if (price > data[i].price) {
+			result.push(data[i]);
+		}
+	}
+	if (result.length != 0) {
+		for (let j = 0; j < result.length; j++) {
+		if (result.length > 0 && result[j].price > maxPrice) {
+			maxPrice = result[j].price;
+		}
+	}
 	
-	// }
-	// else {
-	// 	alert('Автомобилей не найдено!');
-	// }
+	let actualCar = result.find((el) => el.price === maxPrice);
+
+	card.querySelector('img').src = `${actualCar.image}`;
+	card.querySelector('h1').textContent = `${actualCar.mark} ${actualCar.model}`;
+	card.querySelector('p').textContent = `Тип кузова: ${actualCar.carcaseType}`;
+	priceRef = actualCar.price.toString().replace(/\B(?=(?:\d{3})*$)/g, ' ') + " рублей";
+	card.querySelector('h3').textContent = `Цена: ${priceRef}`;
+
+	priceDiv.classList.add('display-none');
+	cardContainer.classList.remove('display-none');
+	
+	}
+	else {
+		alert('Автомобилей не найдено!');
+	}
 	
 
 });
