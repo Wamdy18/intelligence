@@ -7,7 +7,7 @@
 	<link rel="stylesheet" href="style.css">
 </head>
 <body>
-	<div class="begin" id="beginDiv">
+	<div class="begin stage__container" id="beginDiv">
 		<p class="p-begin">
 			Экспертная система, помогающая подобрать новый автомобиль, учитывая простые базовые критерии.
 			Предназначена для людей, которые не смыслят в автомобилях, но имеют деньги и хотят
@@ -16,14 +16,14 @@
 			<br><br>
 			P.S. База автомобилей подобрана на конец 2021 года от официальных диллеров. Цены соответствующие.
 		</p>
-		<button class="button-begin" id="buttonBegin">
+		<button class="button-begin accept__button" id="buttonBegin">
 			Подобрать автомобиль
 		</button>
 		<br>
 		<span class="span-begin">© Developed by Vladimir Petrov and Ilya Zakharov. 2021.</span>
 	</div>
-	<form  onsubmit="return false;">
-		<div class="form-group display-none" id="priceDiv">
+	<form  onsubmit="return false;" class="display-none">
+		<div class="form-group" id="priceDiv">
 			<label for="priceInput">Каким бюджетом вы располагаете? (в рублях)</label>
 			<br><br>
 			<input type="text" name="priceInput" id="priceInput" autocomplete="off">
@@ -65,6 +65,72 @@
 			<button id="carcaseTypeInputBtn">Чекнуть подходящие авто</button>
 		</div>
 	</form>
+
+	<div class="size__container stage__container">
+		<h2>Выберите размера автомобиля</h2>
+		<div class="sizes">
+			<button class="size">Стандартный</button>
+			<button class="size">Вместительный</button>
+			<button class="size">Очень вместительный</button>
+			<button class="size">Настя</button>	
+		</div>
+		<button class="accept__button">Продолжить</button>
+	</div>
+
+	<div class="styles__container stage__container">
+		<h2>Важен ли вам стиль и внешний вид автомобиля?</h2>
+		<div class="styles__buttons">
+			<button class="styles__button accept__button">Да</button>
+			<button class="styles__button accept__button">Настя</button>
+		</div>
+	</div>
+
+	<div class="styles__container stage__container">
+		<h2>Важна ли вам безопасность</h2>
+		<div class="styles__buttons">
+			<button class="security__button accept__button">Да</button>
+			<button class="security__button accept__button">Настя</button>
+		</div>
+	</div>
+
+	<div class="size__container stage__container">
+		<h2>Выберите мощность автомобиля</h2>
+		<div class="sizes">
+			<button class="speed__button">Для городских поездок (до 199 л.с.)</button>
+			<button class="speed__button">Почувствовать скорость (до 449 л.с.)</button>
+			<button class="speed__button">Максимальная мощность (до 1000 л.с.)</button>
+			<button class="speed__button">Настя</button>	
+		</div>
+		<button class="accept__button">Продолжить</button>
+	</div>
+
+	<div class="size__container stage__container">
+		<h2>Выберите габариты автомобиля</h2>
+		<div class="sizes">
+			<button class="gabarities__button">Маленький</button>
+			<button class="gabarities__button">Средний</button>
+			<button class="gabarities__button">Большой</button>
+			<button class="gabarities__button">Очень большой</button>
+			<button class="gabarities__button">Настя</button>	
+		</div>
+		<button class="accept__button">Продолжить</button>
+	</div>
+
+	<div class="size__container stage__container">
+		<h2>Подберем кузов автомобиля</h2>
+		<div class="sizes">
+			<button class="carcase__button">Седан</button>
+			<button class="carcase_button">Купе</button>
+			<button class="carcase__button">Хачбек</button>
+			<button class="carcase__button">Внедорожник</button>
+			<button class="carcase__button">Минивэн</button>
+			<button class="carcase__button">Лифтбек</button>	
+			<button class="carcase__button">Кабриолет</button>	
+			<button class="carcase__button">Настя</button>		
+		</div>
+		<button class="accept__button">Продолжить</button>
+	</div>
+
 	<div class="container-card display-none" id="cardContainer">
 		<h2>Вам больше всего подходит данный автомобиль:</h2>
 		<div class="card" id="card">

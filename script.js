@@ -438,6 +438,32 @@ const data = [
 	}
 ];
 
+document.querySelector('.stage__container').style.display = 'flex';
+let stage = 0; // переменная будет отвечать за активную стадию системы
+
+function changeStage() { //функция отвечает за активную стадию системы
+	let stages = document.querySelectorAll('.stage__container');
+	stages[stage-1].style.display = 'none';
+	stages[stage].style.display = 'flex'
+}
+
+const acceptButtons = document.querySelectorAll('.accept__button');
+for (let i = 0; i<acceptButtons.length; i++) {
+	acceptButtons[i].onclick = () => {stage++; changeStage();}
+}//отвечает за переход стадии
+
+const userResult = {
+	price: 0,
+	sizeAuto: [],
+	roominess: [],
+	style: false,
+	security: false,
+	speed: [],
+	carcaseType: [],
+
+}
+
+
 const priceInput = document.getElementById('priceInput');
 const markInput = document.getElementById('markInput');
 const modelInput = document.getElementById('modelInput');
@@ -529,11 +555,84 @@ priceInputBtn.addEventListener('click', () => {
 
 // });
 
+//Все с размером
+const sizeVariants = document.querySelectorAll('.size');
+for (let i = 0; i < sizeVariants.length; i++) {
+	sizeVariants[i].addEventListener('click', (e) => {
+		e.target.classList.toggle('choosed');
+		if (userResult.roominess.indexOf(e.target.textContent) < 0) {
+			userResult.roominess.push(e.target.textContent);
+		}
+		else {
+			userResult.roominess = userResult.roominess.filter((el) => {return el != e.target.textContent});
+		}
+	})
+}
+
+//Все со стилями
+const styleButtons = document.querySelectorAll('.styles__button');
+for (let i = 0; i < styleButtons.length; i++) {
+	styleButtons[i].addEventListener('click', (e) => {
+		e.target.textContent == 'Да'? userResult.style = true : userResult.style = false;
+	})
+}
+
+//Все с безопасностью
+const securityButtons = document.querySelectorAll('.security__button');
+for (let i = 0; i < styleButtons.length; i++) {
+	styleButtons[i].addEventListener('click', (e) => {
+		e.target.textContent == 'Да'? userResult.security = true : userResult.style = false;
+	})
+}
+
+//Все со скоростью
+const speedButtons = document.querySelectorAll('.speed__button');
+for (let i = 0; i < speedButtons.length; i++) {
+	speedButtons[i].addEventListener('click', (e) => {
+		e.target.classList.toggle('choosed');
+		if (userResult.speed.indexOf(e.target.textContent) < 0) {
+			userResult.speed.push(e.target.textContent);
+		}
+		else {
+			userResult.speed = userResult.speed.filter((el) => {return el != e.target.textContent});
+		}
+	})
+}
+
+//Все с габаритами
+const gabaritiesButtons = document.querySelectorAll('.gabarities__button');
+for (let i = 0; i < gabaritiesButtons.length; i++) {
+	gabaritiesButtons[i].addEventListener('click', (e) => {
+		e.target.classList.toggle('choosed');
+		if (userResult.sizeAuto.indexOf(e.target.textContent) < 0) {
+			userResult.sizeAuto.push(e.target.textContent);
+		}
+		else {
+			userResult.sizeAuto = userResult.sizeAuto.filter((el) => {return el != e.target.textContent});
+		}
+	})
+}
+
+//Все с кузовом
+const carcaseButtons = document.querySelectorAll('.carcase__button');
+for (let i = 0; i < carcaseButtons.length; i++) {
+	carcaseButtons[i].addEventListener('click', (e) => {
+		e.target.classList.toggle('choosed');
+		if (userResult.carcaseType.indexOf(e.target.textContent) < 0) {
+			userResult.carcaseType.push(e.target.textContent);
+		}
+		else {
+			userResult.carcaseType = userResult.sizeAuto.filter((el) => {return el != e.target.textContent});
+		}
+	})
+}
+
+
 const beginDiv = document.getElementById('beginDiv');
 const buttonBegin = document.getElementById('buttonBegin');
 
-buttonBegin.addEventListener('click', () => {
-	beginDiv.classList.add('display-none');
-	priceDiv.classList.remove('display-none');
-});
+// buttonBegin.addEventListener('click', () => {
+// 	beginDiv.classList.add('display-none');
+// 	priceDiv.classList.remove('display-none');
+// });
 

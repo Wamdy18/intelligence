@@ -22,7 +22,7 @@ body {
 }
 
 .display-none {
-	display: none;
+	display: none !important;
 }
 
 .card {
@@ -124,4 +124,32 @@ body {
 	cursor: pointer;
 	margin: 20px;
 	display: inline-block;
+}
+
+.size__container {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+}
+
+.choosed {
+	-moz-box-shadow: 0px 0px 14px green; -webkit-box-shadow: 0px 0px 14px green; box-shadow: 0px 0px 14px green;
+}
+
+
+
+.styles__container {
+	display: flex;
+	flex-direction: column;
+
+}
+
+.styles__buttons {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.stage__container {
+	display: none;
 }
