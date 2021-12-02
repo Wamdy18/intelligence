@@ -449,7 +449,7 @@ function changeStage() { //функция отвечает за активную
 
 const acceptButtons = document.querySelectorAll('.accept__button');
 for (let i = 0; i<acceptButtons.length; i++) {
-	acceptButtons[i].onclick = () => {stage++; changeStage();}
+	acceptButtons[i].onclick = () => {stage++; changeStage(); console.log(userResult)}
 }//отвечает за переход стадии
 
 const userResult = {
@@ -579,19 +579,6 @@ priceInputBtn.onclick = () => {
 
 // });
 
-//Все с размером
-const sizeVariants = document.querySelectorAll('.size');
-for (let i = 0; i < sizeVariants.length; i++) {
-	sizeVariants[i].addEventListener('click', (e) => {
-		e.target.classList.toggle('choosed');
-		if (userResult.roominess.indexOf(e.target.textContent) < 0) {
-			userResult.roominess.push(e.target.textContent);
-		}
-		else {
-			userResult.roominess = userResult.roominess.filter((el) => {return el != e.target.textContent});
-		}
-	})
-}
 
 //Все со стилями
 const styleButtons = document.querySelectorAll('.styles__button');
@@ -609,47 +596,6 @@ for (let i = 0; i < styleButtons.length; i++) {
 	})
 }
 
-//Все со скоростью
-const speedButtons = document.querySelectorAll('.speed__button');
-for (let i = 0; i < speedButtons.length; i++) {
-	speedButtons[i].addEventListener('click', (e) => {
-		e.target.classList.toggle('choosed');
-		if (userResult.speed.indexOf(e.target.textContent) < 0) {
-			userResult.speed.push(e.target.textContent);
-		}
-		else {
-			userResult.speed = userResult.speed.filter((el) => {return el != e.target.textContent});
-		}
-	})
-}
-
-//Все с габаритами
-const gabaritiesButtons = document.querySelectorAll('.gabarities__button');
-for (let i = 0; i < gabaritiesButtons.length; i++) {
-	gabaritiesButtons[i].addEventListener('click', (e) => {
-		e.target.classList.toggle('choosed');
-		if (userResult.sizeAuto.indexOf(e.target.textContent) < 0) {
-			userResult.sizeAuto.push(e.target.textContent);
-		}
-		else {
-			userResult.sizeAuto = userResult.sizeAuto.filter((el) => {return el != e.target.textContent});
-		}
-	})
-}
-
-//Все с кузовом
-const carcaseButtons = document.querySelectorAll('.carcase__button');
-for (let i = 0; i < carcaseButtons.length; i++) {
-	carcaseButtons[i].addEventListener('click', (e) => {
-		e.target.classList.toggle('choosed');
-		if (userResult.carcaseType.indexOf(e.target.textContent) < 0) {
-			userResult.carcaseType.push(e.target.textContent);
-		}
-		else {
-			userResult.carcaseType = userResult.sizeAuto.filter((el) => {return el != e.target.textContent});
-		}
-	})
-}
 
 //кнопка отменить все
 const pohui = document.querySelectorAll('.nastya__button');
@@ -662,9 +608,30 @@ for (let i=0; i<pohui.length; i++) {
 			paramButtons[i].classList.remove('choosed');
 		}
 		userResult[parent.dataset.attribute] = [];
-		console.log(parent.dataset.attribute, userResult);
+	
 
 	}
+}
+
+//обычная кнопка выбора
+const paramButtons = document.querySelectorAll('.param_button');
+for (let i=0; i<paramButtons.length; i++) {
+	paramButtons[i].onclick = (e) => {
+		e.target.classList.toggle('choosed');
+		let parent = e.target.parentElement;
+		let nastyaButton = parent.querySelector('.nastya__button');
+		nastyaButton.classList.remove('choosed');
+		userResult[parent.dataset.attribute].push(e.target.textContent);
+	}
+}
+
+const finalButton = document.querySelector('.final__button');
+finalButton.onclick = () => {
+	stage++;
+	changeStage();
+	let finalAuto = 
+	finalAuto = data.filter((el) => el.style === userResult.style && el.securityLevel === userResult.security &&  )
+
 }
 
 const beginDiv = document.getElementById('beginDiv');

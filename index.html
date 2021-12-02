@@ -69,9 +69,9 @@
 	<div class="size__container stage__container">
 		<h2>Выберите размера автомобиля</h2>
 		<div class="sizes" data-attribute='roominess'>
-			<button class="size param_button">Стандартный</button>
-			<button class="size param_button">Вместительный</button>
-			<button class="size param_button">Очень вместительный</button>
+			<button class="size param_button" data-atr="Usual">Стандартный</button>
+			<button class="size param_button" data-atr="Roomy">Вместительный</button>
+			<button class="size param_button" data-atr="VeryRoomy">Очень вместительный</button>
 			<button class="nastya__button">Настя</button>	
 		</div>
 		<button class="accept__button">Продолжить</button>
@@ -95,22 +95,22 @@
 
 	<div class="size__container stage__container">
 		<h2>Выберите мощность автомобиля</h2>
-		<div class="sizes">
-			<button class="speed__button">Для городских поездок (до 199 л.с.)</button>
-			<button class="speed__button">Почувствовать скорость (до 449 л.с.)</button>
-			<button class="speed__button">Максимальная мощность (до 1000 л.с.)</button>
-			<button class="nastya__button">Настя</button>	
+		<div class="sizes" data-attribute='speed'>
+			<button class="speed__button param_button" data-atr="Usual">Для городских поездок (до 199 л.с.)</button>
+			<button class="speed__button param_button" data-atr="Fast">Почувствовать скорость (до 449 л.с.)</button>
+			<button class="speed__button param_button" data-atr="VeryFast">Максимальная мощность (до 1000 л.с.)</button>
+			<button class="nastya__button param_button">Настя</button>	
 		</div>
 		<button class="accept__button">Продолжить</button>
 	</div>
 
 	<div class="size__container stage__container">
 		<h2>Выберите габариты автомобиля</h2>
-		<div class="sizes">
-			<button class="gabarities__button">Маленький</button>
-			<button class="gabarities__button">Средний</button>
-			<button class="gabarities__button">Большой</button>
-			<button class="gabarities__button">Очень большой</button>
+		<div class="sizes" data-attribute='sizeAuto'>
+			<button class="gabarities__button param_button" data-atr="Small">Маленький</button>
+			<button class="gabarities__button param_button" data-atr="Medium">Средний</button>
+			<button class="gabarities__button param_button" data-atr="Big">Большой</button>
+			<button class="gabarities__button param_button" data-atr="VeryBig">Очень большой</button>
 			<button class="nastya__button">Настя</button>	
 		</div>
 		<button class="accept__button">Продолжить</button>
@@ -118,17 +118,30 @@
 
 	<div class="size__container stage__container">
 		<h2>Подберем кузов автомобиля</h2>
-		<div class="sizes">
-			<button class="carcase__button">Седан</button>
-			<button class="carcase_button">Купе</button>
-			<button class="carcase__button">Хачбек</button>
-			<button class="carcase__button">Внедорожник</button>
-			<button class="carcase__button">Минивэн</button>
-			<button class="carcase__button">Лифтбек</button>	
-			<button class="carcase__button">Кабриолет</button>	
-			<button class="nastya__button">Настя</button>		
+		<div class="sizes" data-attribute="carcaseType">
+			<button class="carcase__button param_button" data-atr="Седан">Седан</button>
+			<button class="carcase_button param_button" data-atr="Купе">Купе</button>
+			<button class="carcase__button param_button" data-atr="Хэтчбек">Хачбек</button>
+			<button class="carcase__button param_button" data-atr="Внедорожник">Внедорожник</button>
+			<button class="carcase__button param_button" data-atr="Минивэн">Минивэн</button>
+			<button class="carcase__button param_button" data-atr="Лифтбек">Лифтбек</button>	
+			<button class="carcase__button param_button" data-atr="Кабриолет">Кабриолет</button>	
+			<button class="carcase__button nastya__button">Настя</button>		
 		</div>
-		<button class="accept__button">Продолжить</button>
+		<button class="final__button">Продолжить</button>
+	</div>
+
+	<div class="stage__container container-card">
+		<h2>Вам больше всего подходит данный автомобиль:</h2>
+		<div class="card" id="card">
+			<img src="" alt="">
+			<br><br>
+			<h1 class="card-title"></h1>
+			<br>
+			<p></p>
+			<br>
+			<h3>Начальная цена: <span></span> рублей</h3>
+		</div>
 	</div>
 
 	<div class="container-card display-none" id="cardContainer">
