@@ -630,7 +630,7 @@ finalButton.onclick = () => {
 	stage++;
 	changeStage();
 	let finalAuto = 
-	finalAuto = data.filter((el) => el.style === userResult.style && el.securityLevel === userResult.security &&  )
+	finalAuto = data.filter((el) => el.style === userResult.style && el.securityLevel === userResult.security)
 
 }
 
