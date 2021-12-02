@@ -489,43 +489,67 @@ let maxPrice = 0;
 let card = document.getElementById('card');
 let cardContainer = document.getElementById('cardContainer');
 
-priceInputBtn.addEventListener('click', () => {
-	price = priceInput.value;
-	price = Number(price);
-	
-	// priceDiv.classList.add('display-none');
-	// markDiv.classList.remove('display-none');
+//Все с ценой
 
+
+// priceInputBtn.addEventListener('click', () => {
+// 	price = priceInput.value;
+// 	price = Number(price);
+	
+// 	// priceDiv.classList.add('display-none');
+// 	// markDiv.classList.remove('display-none');
+
+// 	for (let i = 0; i < data.length; i++) {
+// 		if (price > data[i].price) {
+// 			result.push(data[i]);
+// 		}
+// 	}
+// 	if (result.length != 0) {
+// 		for (let j = 0; j < result.length; j++) {
+// 		if (result.length > 0 && result[j].price > maxPrice) {
+// 			maxPrice = result[j].price;
+// 		}
+// 	}
+	
+// 	let actualCar = result.find((el) => el.price === maxPrice);
+
+// 	card.querySelector('img').src = `${actualCar.image}`;
+// 	card.querySelector('h1').textContent = `${actualCar.mark} ${actualCar.model}`;
+// 	card.querySelector('p').textContent = `Тип кузова: ${actualCar.carcaseType}`;
+// 	priceRef = actualCar.price.toString().replace(/\B(?=(?:\d{3})*$)/g, ' ') + " рублей";
+// 	card.querySelector('h3').textContent = `Цена: ${priceRef}`;
+
+// 	priceDiv.classList.add('display-none');
+// 	cardContainer.classList.remove('display-none');
+	
+// 	}
+// 	else {
+// 		alert('Автомобилей не найдено!');
+// 	}
+	
+
+// });
+
+priceInputBtn.onclick = () => {
+	let auto = false
+	userResult.price = Number(priceInput.value);
 	for (let i = 0; i < data.length; i++) {
-		if (price > data[i].price) {
-			result.push(data[i]);
-		}
-	}
-	if (result.length != 0) {
-		for (let j = 0; j < result.length; j++) {
-		if (result.length > 0 && result[j].price > maxPrice) {
-			maxPrice = result[j].price;
-		}
-	}
-	
-	let actualCar = result.find((el) => el.price === maxPrice);
+ 		if (userResult.price >= data[i].price) {
+ 			console.log(userResult.price)
+ 			stage++;
+ 			changeStage();
+ 			auto = true;
+ 			break;
+ 		}
+ 	}
+ 	if (!auto) alert('К несчастью, мы не можем подсказать вам автомобиль с указанной ценой. Пожалуйста, измените значение')
 
-	card.querySelector('img').src = `${actualCar.image}`;
-	card.querySelector('h1').textContent = `${actualCar.mark} ${actualCar.model}`;
-	card.querySelector('p').textContent = `Тип кузова: ${actualCar.carcaseType}`;
-	priceRef = actualCar.price.toString().replace(/\B(?=(?:\d{3})*$)/g, ' ') + " рублей";
-	card.querySelector('h3').textContent = `Цена: ${priceRef}`;
 
-	priceDiv.classList.add('display-none');
-	cardContainer.classList.remove('display-none');
-	
-	}
-	else {
-		alert('Автомобилей не найдено!');
-	}
-	
+}
 
-});
+//Цена закончилась
+
+
 
 // markInputBtn.addEventListener('click', () => {
 // 	mark = markInput.value;
@@ -627,6 +651,21 @@ for (let i = 0; i < carcaseButtons.length; i++) {
 	})
 }
 
+//кнопка отменить все
+const pohui = document.querySelectorAll('.nastya__button');
+for (let i=0; i<pohui.length; i++) {
+	pohui[i].onclick = (e) => {
+		e.target.classList.toggle('choosed');
+		let parent = e.target.parentElement;
+		let paramButtons = parent.querySelectorAll('.param_button');
+		for(let i=0; i<paramButtons.length; i++) {
+			paramButtons[i].classList.remove('choosed');
+		}
+		userResult[parent.dataset.attribute] = [];
+		console.log(parent.dataset.attribute, userResult);
+
+	}
+}
 
 const beginDiv = document.getElementById('beginDiv');
 const buttonBegin = document.getElementById('buttonBegin');

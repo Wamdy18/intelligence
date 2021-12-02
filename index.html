@@ -22,7 +22,7 @@
 		<br>
 		<span class="span-begin">© Developed by Vladimir Petrov and Ilya Zakharov. 2021.</span>
 	</div>
-	<form  onsubmit="return false;" class="display-none">
+	<form  onsubmit="return false;" class="stage__container">
 		<div class="form-group" id="priceDiv">
 			<label for="priceInput">Каким бюджетом вы располагаете? (в рублях)</label>
 			<br><br>
@@ -68,11 +68,11 @@
 
 	<div class="size__container stage__container">
 		<h2>Выберите размера автомобиля</h2>
-		<div class="sizes">
-			<button class="size">Стандартный</button>
-			<button class="size">Вместительный</button>
-			<button class="size">Очень вместительный</button>
-			<button class="size">Настя</button>	
+		<div class="sizes" data-attribute='roominess'>
+			<button class="size param_button">Стандартный</button>
+			<button class="size param_button">Вместительный</button>
+			<button class="size param_button">Очень вместительный</button>
+			<button class="nastya__button">Настя</button>	
 		</div>
 		<button class="accept__button">Продолжить</button>
 	</div>
@@ -99,7 +99,7 @@
 			<button class="speed__button">Для городских поездок (до 199 л.с.)</button>
 			<button class="speed__button">Почувствовать скорость (до 449 л.с.)</button>
 			<button class="speed__button">Максимальная мощность (до 1000 л.с.)</button>
-			<button class="speed__button">Настя</button>	
+			<button class="nastya__button">Настя</button>	
 		</div>
 		<button class="accept__button">Продолжить</button>
 	</div>
@@ -111,7 +111,7 @@
 			<button class="gabarities__button">Средний</button>
 			<button class="gabarities__button">Большой</button>
 			<button class="gabarities__button">Очень большой</button>
-			<button class="gabarities__button">Настя</button>	
+			<button class="nastya__button">Настя</button>	
 		</div>
 		<button class="accept__button">Продолжить</button>
 	</div>
@@ -126,7 +126,7 @@
 			<button class="carcase__button">Минивэн</button>
 			<button class="carcase__button">Лифтбек</button>	
 			<button class="carcase__button">Кабриолет</button>	
-			<button class="carcase__button">Настя</button>		
+			<button class="nastya__button">Настя</button>		
 		</div>
 		<button class="accept__button">Продолжить</button>
 	</div>
