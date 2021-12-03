@@ -438,6 +438,13 @@ const data = [
 	}
 ];
 
+function sortArray(x,y) {
+	if (x.price > y.price) return -1
+	if (x.price < y.price) return 1
+	return 0;
+}
+
+
 document.querySelector('.stage__container').style.display = 'flex';
 let stage = 0; // переменная будет отвечать за активную стадию системы
 
@@ -621,7 +628,7 @@ for (let i=0; i<paramButtons.length; i++) {
 		let parent = e.target.parentElement;
 		let nastyaButton = parent.querySelector('.nastya__button');
 		nastyaButton.classList.remove('choosed');
-		userResult[parent.dataset.attribute].push(e.target.textContent);
+		userResult[parent.dataset.attribute].push(e.target.dataset.atr);
 	}
 }
 
@@ -629,8 +636,22 @@ const finalButton = document.querySelector('.final__button');
 finalButton.onclick = () => {
 	stage++;
 	changeStage();
+	console.log(userResult.sizeAuto.indexOf('Medium'));
 	let finalAuto = 
-	finalAuto = data.filter((el) => el.style === userResult.style && el.securityLevel === userResult.security)
+	data.filter((el) => 
+	el.style === userResult.style &&
+	 el.securityLevel === userResult.security &&
+	 userResult.sizeAuto.indexOf(el.sizeAuto) >= 0 &&
+	userResult.roominess.indexOf(el.roominess) >= 0 && 
+	userResult.speed.indexOf(el.speed) >= 0 &&
+	userResult.carcaseType.indexOf(el.carcaseType) >= 0 && 
+	userResult.price >= el.price
+	).sort(sortArray)[0];
+	const card = document.querySelector('.container-card');
+	card.querySelector('h1').textContent = `${finalAuto.mark} ${finalAuto.model}`;
+	card.querySelector('p').textContent += finalAuto.carcaseType;
+	card.querySelector('span').textContent = finalAuto.price;
+	card.querySelector('img').src=finalAuto.image;
 
 }
 
