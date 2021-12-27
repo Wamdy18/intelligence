@@ -3,157 +3,85 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Expert System</title>
+	<title>RS</title>
 	<link rel="stylesheet" href="style.css">
 </head>
 <body>
-	<div class="begin stage__container" id="beginDiv">
-		<p class="p-begin">
-			Экспертная система, помогающая подобрать новый автомобиль, учитывая простые базовые критерии.
-			Предназначена для людей, которые не смыслят в автомобилях, но имеют деньги и хотят
-			приобрести автомобиль. Данная экспертная система поможет определиться с выбором и порекомендует
-			наиболее подходящие для Вас варианты.
-			<br><br>
-			P.S. База автомобилей подобрана на конец 2021 года от официальных диллеров. Цены соответствующие.
-		</p>
-		<button class="button-begin accept__button" id="buttonBegin">
-			Подобрать автомобиль
-		</button>
-		<br>
-		<span class="span-begin">© Developed by Vladimir Petrov and Ilya Zakharov. 2021.</span>
-	</div>
-	<form  onsubmit="return false;" class="stage__container">
-		<div class="form-group" id="priceDiv">
-			<label for="priceInput">Каким бюджетом вы располагаете? (в рублях)</label>
-			<br><br>
-			<input type="text" name="priceInput" id="priceInput" autocomplete="off">
-			<button id="priceInputBtn">Далее</button>
-		</div>
-		<div class="form-group display-none" id="markDiv">
-			<label for="markInput">Выберите марку желаемого автомобиля</label>
-			<br><br>
-			<div class="markChoiceDiv">
-				<span>Не имеет значения</span>
-				<span>Lada</span>
-				<span>Audi</span>
-				<span>BMW</span>
-				<span>Chevrolet</span>
-				<span>Ford</span>
-				<span>Hyundai</span>
-				<span>Kia</span>
-				<span>Mercedes-Benz</span>
-				<span>Mitshubishi</span>
-				<span>Nissan</span>
-				<span>Opel</span>
-				<span>Renault</span>
-				<span>Skoda</span>
-				<span>Toyota</span>
-				<span>Volkswagen</span>
+	<div class="start-page showcase" id="startPage">
+		<video src="explore.mp4" muted loop autoplay></video>
+		<div class="overlay"></div>
+		<div class="sp-container">
+			<div class="text">
+				<p>Экспертная система, помогающая подобрать новый автомобиль. Предназначена для людей, которые не разбираются в машинах, но обладают деньгами и задумываются о покупке транспортного средства. Данная экспертная система поможет определиться с выбором и порекомендует
+				наиболее подходящие для Вас варианты.
+				<br><br>
+				P.S. База автомобилей подобрана на конец 2021 года от официальных диллеров. Цены соответствующие.</p>
+				<button class="button-begin" id="buttonBegin">
+					Подобрать автомобиль
+				</button>
+				<span class="span-begin">© Developed by Vladimir Petrov and Ilya Zakharov. 2021.</span>
 			</div>
-			<button id="markInputBtn">Далее</button>
-		</div>
-		<div class="form-group display-none" id="modelDiv">
-			<label for="modelInput">Укажите модель желаемого автомобиля (необязательное поле)</label>
-			<br><br>
-			<input type="text" name="modelInput" id="modelInput">
-			<button id="modelInputBtn">Далее</button>
-		</div>
-		<div class="form-group display-none" id="carcaseTypeDiv">
-			<label for="carcaseTypeInput">Укажите тип кузова желаемого автомобиля (необязательное поле)</label>
-			<br><br>
-			<input type="text" name="carcaseTypeInput" id="carcaseTypeInput">
-			<button id="carcaseTypeInputBtn">Чекнуть подходящие авто</button>
-		</div>
-	</form>
-
-	<div class="size__container stage__container">
-		<h2>Выберите размера автомобиля</h2>
-		<div class="sizes" data-attribute='roominess'>
-			<button class="size param_button" data-atr="Usual">Стандартный</button>
-			<button class="size param_button" data-atr="Roomy">Вместительный</button>
-			<button class="size param_button" data-atr="VeryRoomy">Очень вместительный</button>
-			<button class="nastya__button">Не важно</button>	
-		</div>
-		<button class="accept__button">Продолжить</button>
-	</div>
-
-	<div class="styles__container stage__container">
-		<h2>Важен ли вам стиль и внешний вид автомобиля?</h2>
-		<div class="styles__buttons">
-			<button class="styles__button accept__button">Да</button>
-			<button class="styles__button accept__button">Нет</button>
 		</div>
 	</div>
-
-	<div class="styles__container stage__container">
-		<h2>Важна ли вам безопасность</h2>
-		<div class="styles__buttons">
-			<button class="security__button accept__button">Да</button>
-			<button class="security__button accept__button">Нет</button>
-		</div>
-	</div>
-
-	<div class="size__container stage__container">
-		<h2>Выберите мощность автомобиля</h2>
-		<div class="sizes" data-attribute='speed'>
-			<button class="speed__button param_button" data-atr="Usual">Для городских поездок (до 199 л.с.)</button>
-			<button class="speed__button param_button" data-atr="Fast">Почувствовать скорость (до 449 л.с.)</button>
-			<button class="speed__button param_button" data-atr="VeryFast">Максимальная мощность (до 1000 л.с.)</button>
-			<button class="nastya__button param_button">Не важно</button>	
-		</div>
-		<button class="accept__button">Продолжить</button>
-	</div>
-
-	<div class="size__container stage__container">
-		<h2>Выберите габариты автомобиля</h2>
-		<div class="sizes" data-attribute='sizeAuto'>
-			<button class="gabarities__button param_button" data-atr="Small">Маленький</button>
-			<button class="gabarities__button param_button" data-atr="Medium">Средний</button>
-			<button class="gabarities__button param_button" data-atr="Big">Большой</button>
-			<button class="gabarities__button param_button" data-atr="VeryBig">Очень большой</button>
-			<button class="nastya__button">Не важно</button>	
-		</div>
-		<button class="accept__button">Продолжить</button>
-	</div>
-
-	<div class="size__container stage__container">
-		<h2>Подберем кузов автомобиля</h2>
-		<div class="sizes" data-attribute="carcaseType">
-			<button class="carcase__button param_button" data-atr="Седан">Седан</button>
-			<button class="carcase_button param_button" data-atr="Купе">Купе</button>
-			<button class="carcase__button param_button" data-atr="Хэтчбек">Хэтчбек</button>
-			<button class="carcase__button param_button" data-atr="Внедорожник">Внедорожник</button>
-			<button class="carcase__button param_button" data-atr="Минивэн">Минивэн</button>
-			<button class="carcase__button param_button" data-atr="Лифтбек">Лифтбек</button>	
-			<button class="carcase__button param_button" data-atr="Кабриолет">Кабриолет</button>	
-			<button class="carcase__button nastya__button">Не важно</button>		
-		</div>
-		<button class="final__button">Продолжить</button>
-	</div>
-
-	<div class="stage__container container-card">
-		<h2>Вам больше всего подходит данный автомобиль:</h2>
-		<div class="card" id="card">
-			<img src="" alt="">
-			<br><br>
-			<h1 class="card-title"></h1>
-			<br>
-			<p>Тип кузова: </p>
-			<br>
-			<h3>Начальная цена: <span></span> рублей</h3>
-		</div>
-	</div>
-
-	<div class="display-none" id="cardContainer">
-		<h2>Вам больше всего подходит данный автомобиль:</h2>
-		<div class="card" id="card">
-			<img src="http://avatars.mds.yandex.net/get-verba/787013/2a00000163d68e1bc2da6042f7438f626da8/cattouchretcr" alt="">
-			<br><br>
-			<h1 class="card-title">BMW X5 IV</h1>
-			<br>
-			<p>Тип кузова: Внедорожник</p>
-			<br>
-			<h3>Начальная цена: 5 585 313 рублей</h3>
+	<div class="main-page d-none" id="mainPage">
+		<div class="main-overlay"></div>
+		<div class="main-content">
+			<div class="group" id="group1">
+				<label for="priceInput">Каким бюджетом в рублях вы располагаете?</label>
+				<input type="number" id="priceInput" name="priceInput" autocomplete="off" value="" >
+				<button id="priceBtn">Далее</button>
+			</div>
+			<div class="group d-none" id="group2">
+				<label for="speedInput">Выберите мощность автомобиля</label>
+				<select type="text" id="speedInput" name="speedInput">
+					<option value="Usual">Обычный</option>
+					<option value="Fast">Быстрый</option>
+					<option value="VeryFast">Очень быстрый</option>
+				</select>
+				<button id="speedBtn">Далее</button>
+			</div>
+			<div class="group d-none" id="group3">
+				<label for="styleInput">Вы хотите стильный автомобиль?</label>
+				<select type="text" id="styleInput" name="styleInput">
+					<option value="0">Обычный</option>
+					<option value="1">Стильный</option>
+				</select>
+				<button id="styleBtn">Далее</button>
+			</div>
+			<div class="group d-none" id="group4">
+				<label for="sizeInput">Выберите размер автомобиля</label>
+				<select type="text" id="sizeInput" name="sizeInput">
+					<option value="Small">Маленький</option>
+					<option value="Medium">Средний</option>
+					<option value="Big">Большой</option>
+					<option value="VeryBig">Очень большой</option>
+				</select>
+				<button id="sizeBtn">Далее</button>
+			</div>
+			<div class="group resultGroup d-none" id="resultGroup">
+				<h5>Вам больше всего подходит данный автомобиль:</h5>
+				<div class="resultCarCard" id="resultCarCard">
+					<h5 id="resultCarCardName">Car Name</h5>
+					<img src="bg5.jpg" alt="" id="resultCarCardImg">
+					<p>Начальная цена: <span id="resultCarCardSpanPrice">123 123</span> рублей</p>
+					<a href="#" id="resultCarCardLink">Посмотреть на auto.ru</a>
+				</div>
+			</div>
+			<div class="group d-none actualRecomendationGroup " id="actualRecomendationGroup">
+				<h4>Учитывая все выбранные критерии, вам больше всего подходит автомобиль:</h4>
+				<div class="actualCarCard" id="actualCarCard">
+					<h5 id="carCardName">Car Name</h5>
+					<img src="bg5.jpg" alt="" id="carCardImg">
+					<p>Начальная цена: <span id="carCardSpanPrice">123 123</span> рублей</p>
+					<a href="#" id="carCardLink">Посмотреть на auto.ru</a>
+				</div>
+				<b><span id="actualRecomendationSpan"></span></b>
+				<br><br>
+				<p>Объяснение рекомендации: <span id="explanationRecomendationSpan"></span></p>
+			</div>
+			<div class="group reloadPageGroup d-none" id="reloadPageGroup">
+				<h4>Автомобилей для такого бюджета не найдено! <br><br>Обновите страницу и введите бюджет побольше.</h4>
+			</div>
 		</div>
 	</div>
 	<script src="script.js"></script>

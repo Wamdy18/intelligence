@@ -1,64 +1,90 @@
-/*#5e2f28 - темно коричневый*/
-/*#cc724b - чуть посветлее коричневый*/
-/*#b69499 - желтый*/
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700&display=swap');
+/*font-family: 'Montserrat', sans-serif;*/
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap');
 
 * {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
+	font-family: 'Montserrat', sans-serif;
 }
 
-body {
-	min-height: 100vh;
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+/*Начальная страница*/
+
+.showcase {
+	position: absolute;
+	right: 0;
 	width: 100%;
-	background-color: #cc724b;
+	min-height: 100vh;
+	z-index: 2;
+	background-color: #000;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	font-family: 'Poppins', 'Open Sans', sans-serif;
 }
 
-.display-none {
-	display: none !important;
+.showcase video {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	opacity: 0.4;
 }
 
-.card {
-	width: 440px;
-	text-align: center;
-	background-color: #f4f4f4;
-	padding: 20px;
-	max-width: 100%;
-	border-radius: 10px;
-	box-shadow: 0 0 10px 3px rgba(100,100,100,.4);
-	overflow: hidden;
-	margin: 0 auto;
-	margin-top: 50px;
-}
 
-.card img {
-	width: 400px;
-	height: 280px;
-}
+/*Если нужно наложение какого-либо цвета на видео*/
+/*.overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	mix-blend-mode: overlay;
+	background: red;
+	opacity: 0.1;
+}*/
 
-.begin {
-	width: 1200px;
-	text-align: center;
-	color: #000;
-	flex-direction: column;
+.sp-container {
+	position: relative;
+	z-index: 10;
+	width: 95vw;
+	height: 95vh;
+	border: 1px solid #fff;
+	display: flex;
+	justify-content: center;
 	align-items: center;
 }
 
-.begin button {
-	width: fit-content;
+.text {
+	color: white;
+	text-align: center;
+	padding: 0 50px;
 }
 
-.p-begin {
+.button-begin {
+	background-color: transparent;
 	font-size: 18px;
-	margin-bottom: 50px;
-	font-weight: 600;
+	padding: 10px 20px;
+	border: 1px solid #fff;
+	cursor: pointer;
+	transition: 0.2s ease all;
+	color: #fff;
+	margin-top: 50px;
+}
+
+.button-begin:hover {
+	background-color: #fff;
+	color: #000;
+	transition: 0.2s ease all;
 }
 
 .span-begin {
@@ -70,96 +96,161 @@ body {
 	font-weight: 500;
 }
 
-.button-begin {
+/*Main Page*/
+
+.main-page {
+	background-image: url(bg5.jpg);
+	background-size: cover;
+	background-position: center center;
+	background-repeat: no-repeat;
+	min-height: 100vh;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+}
+
+.main-overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	/*mix-blend-mode: overlay;*/
+	background: black;
+	opacity: 0.96;
+}
+
+.main-content {
+	position: absolute;
+	z-index: 20;
+	color: #fff;
+	display: flex;
+	/*justify-content: space-between;*/
+	align-items: center;
+	width: 100%;
+	justify-content: center;
+
+}
+
+.group {
+	/*display: flex;*/
+	text-align: center;
+	width: 40%;
+	/*border: 1px solid red;*/
+}
+
+.group label{
+	display: block;
+	margin-bottom: 20px;
+}
+
+.group input {
+	display: block;
+	margin: 0 auto;
 	background-color: transparent;
 	font-size: 18px;
+	border: 1px solid #fff;
+	padding: 10px;
+	color: #fff;
+	width: 300px;
+}
+
+.group button {
+	margin: 0 auto;
+	display: block;
+	margin-top: 20px;
+	font-size: 20px;
+	background-color: transparent;
+	border: none;
+	color: #fff;
+	cursor: pointer;
+}
+
+.group select {
+	margin: 0 auto;
+	display: block;
+	font-size: 18px;
+	color: white;
+	background-color: transparent;
+	padding: 10px;
+	cursor: pointer;
+	width: 300px;
+}
+
+.group select option {
+	background-color: #000;
+	cursor: pointer;
+}
+
+.actualRecomendationGroup {
+	width: 40%;
+	/*border: 1px solid red;*/
+	margin-left: 100px;
+}
+
+.actualCarCard, .resultCarCard {
+	width: 300px;
+	text-align: center;
+	background-color: #f4f4f4;
+	padding: 20px;
+	max-width: 100%;
+	border-radius: 10px;
+	box-shadow: 0 0 10px 3px rgba(100,100,100,.4);
+	overflow: hidden;
+	margin: 0 auto;
+	margin-top: 50px;
+	color: black;
+}
+
+.resulCarCard {
+	width: 400px;
+}
+
+.actualCarCard h5, .resultCarCard h5 {
+	font-size: 18px;
+}
+
+.actualCarCard img, .resultCarCard img {
+	width: 250px;
+	height: 180px;
+	margin-top: 15px;
+}
+
+.resulCarCard img {
+	width: 350px;
+	height: 270px;
+}
+
+.actualCarCard p, .resultCarCard p {
+	margin-top: 20px;
+	font-size: 14px;
+}
+
+.actualCarCard a, .resultCarCard a{
+	background-color: transparent;
+	font-size: 14px;
 	padding: 10px 20px;
 	border: 1px solid #000;
 	cursor: pointer;
 	transition: 0.2s ease all;
-}
-
-.button-begin:hover {
-	background-color: #000;
-	color: #cc724b;
-	transition: 0.2s ease all;
-}
-
-.form-group {
-	text-align: center;
-}
-
-.form-group label {
-	font-size: 18px;
-	font-weight: 600;
-}
-
-.form-group input {
-	background-color: transparent;
-	font-size: 18px;
-	border: 1px solid #000;
-	padding: 10px;
-}
-
-.form-group input:focus, .form-group input:active {
-	outline: none;
-}
-
-.form-group button {
-	background-color: #000;
-	border: 1px solid #000;
-	font-size: 18px;
-	color: #cc724b;
-	cursor: pointer;
-	padding: 10px;
-	margin-left: 10px;
-}
-
-.markChoiceDiv {
-	max-width: 1000px;
-	/*display: flex;*/
-	padding: 30px 0;
-}
-
-.markChoiceDiv span {
-	text-align: center;
-	background-color: #f4f4f4;
-	padding: 10px;
-	border-radius: 10px;
-	box-shadow: 0 0 10px 3px rgba(100,100,100,.4);
-	cursor: pointer;
-	margin: 20px;
+	color: #000;
+	margin-top: 20px;
 	display: inline-block;
+	text-decoration: none;
 }
 
-.size__container {
-	display: flex;
-	flex-direction: column;
-	justify-content: space-around;
-}
-
-.choosed {
-	-moz-box-shadow: 0px 0px 14px green; -webkit-box-shadow: 0px 0px 14px green; box-shadow: 0px 0px 14px green;
+.actualCarCard a:hover, .resultCarCard a:hover {
+	background-color: #000;
+	border: 1px solid #000;
+	transition: 0.2s ease all;
+	color: #fff;
 }
 
 
 
-.styles__container {
-	display: flex;
-	flex-direction: column;
 
-}
-
-.styles__buttons {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-}
-
-.stage__container {
+.d-none {
 	display: none;
-}
-
-.container-card {
-	flex-direction: column;
 }

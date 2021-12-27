@@ -1,63 +1,3 @@
-// Описание критериев:
-// 1) price - цена автомобиля. Основной критерий. Пользователь вводит бюджет, которым он располагает. 
-// Автомобили прежде всего отбираются по цене, не привышающей введёную пользователем.
-// 2) mark - марка автомобиля. ПОКА НЕ ВЫВОДИТЬ, НЕ ДАВАТЬ ПОЛЬЗОВАТЕЛЮ ВЫБИРАТЬ МАРКУ. 
-//  ----------------------------------------------------------------------------------------------------- Пользователь может выбрать "Не имеет значения" или выбрать любую интересующую его.
-// 3) model - модель автомобиля. ПОКА НЕ ВЫВОДИТЬ, НЕ ДАВАТЬ ПОЛЬЗОВАТЕЛЮ ВЫБИРАТЬ МОДЕЛЬ.
-// 4) carcaseType - тип кузова. Типы: Седан, Купе, Хэтчбек, Внедорожник, Минивэн, Лифтбек, Кабриолет, 
-// Пикап, Компактвэн, Универсал (пока нет)
-// 5) image - ссылка на изображение автомобиля.
-// 6) speed - скорость автомобиля:
-// Usual - до 199 л.с.
-// Fast - от 200 л.с. до 449 л.с.
-// VeryFast - от 450 л.с. до 1000 л.с.
-// 7) roominess - вместительность: Usual, Roomy, VeryRoomy 
-// 8) securityLevel - уровень безопасности: true/false (обычный/более безопасный)
-// 9) style - стильный внешний вид автомобиля: true/false (обычный/стильный)
-// 10) link - ссылка на подборку новых данных автомобилей на auto.ru 
-// 11) sizeAuto - габариты автомобиля: Small, Medium, Big, VeryBig
-
-
-// Описание алгоритма: 
-// 1. Пользователь вводит бюджет. 
-// Автомобили отбираются по бюджету, не превышающий введённый. 
-// 2. Пользователь выбирает остальные критерии в порядке: (МАРКУ ПОКА ТОЖЕ НЕ ВЫВОДИМ) 
-// Тип кузова, Скорость, Вместительность, Безопасность, Стильный внешний вид, Габариты автомобиля.
-// ??? - (Тут хз, пока можно не делать) К каждому критерию добавить вариант "Не имеет значения"
-
-// Дальше 2 варианта алгоритма, но нам больше подходит второй:
-// 1) Выводить самый дорогой автомобиль (в соответствии с введенным бюджетом), который подходит по всем критериям.
-// 2) Ссоздать какой-нибудь массив/счетчик, который считает совпадения. Максимум - 6 совпадений. Если у нас 
-// нет автомобиля, который подходит по всем критерий, показываем тот, где совпадает больше всего критериев.
-
-// Например: Lada Vesta 1
-// 		price: 667310,
-// 		mark: "Lada",
-// 		model: "Vesta 1",
-// 		carcaseType: "Седан",
-// 		speed: "Usual",
-// 		roominess: "Usual",
-// 		securityLevel: false,
-// 		style: false,
-// 		sizeAuto: "Medium"
-
-// Пользователь вводит: 
-//  Тип кузова: Не имеет значения (тоже добавляет счет в счетчик)
-//  Скорость: Обычная (Usual)
-//  Вместительность: Обычная (Usual)
-//  Безопасность: Более безопасный (true)
-//  Стильный внешний вид: Обычный (false)
-//  Габариты автомобиля: Средние (Medium)
-
-// Совпадений по критериям: 5
-
-// Но, так как, других более совпадающих авто нет (может и есть, хз, тут как пример), выводим это
-
-
-// Описание вывода:
-// Та же карточка, что и была + кнопка [Посмотреть автомобили] со ссылкой link.
-
-
 const data = [
 	{
 		price: 667310,
@@ -438,228 +378,303 @@ const data = [
 	}
 ];
 
-function sortArray(x,y) {
-	if (x.price > y.price) return -1
-	if (x.price < y.price) return 1
-	return 0;
-}
+const buttonBegin = document.getElementById('buttonBegin');
+const startPage = document.getElementById('startPage');
+const mainPage = document.getElementById('mainPage');
+buttonBegin.addEventListener('click', () => {
+	startPage.classList.add('d-none');
+	mainPage.classList.remove('d-none');
+});
 
 
-document.querySelector('.stage__container').style.display = 'flex';
-let stage = 0; // переменная будет отвечать за активную стадию системы
+const carCardName = document.getElementById('carCardName');
+const carCardImg = document.getElementById('carCardImg');
+const carCardSpanPrice = document.getElementById('carCardSpanPrice');
+// const carCardLink = document.getElementById('carCardLink');
 
-function changeStage() { //функция отвечает за активную стадию системы
-	let stages = document.querySelectorAll('.stage__container');
-	stages[stage-1].style.display = 'none';
-	stages[stage].style.display = 'flex'
-}
+const resultCarCardName = document.getElementById('resultCarCardName');
+const resultCarCardImg = document.getElementById('resultCarCardImg');
+const resultCarCardSpanPrice = document.getElementById('resultCarCardSpanPrice');
+// const carCardLink = document.getElementById('carCardLink');
 
-const acceptButtons = document.querySelectorAll('.accept__button');
-for (let i = 0; i<acceptButtons.length; i++) {
-	acceptButtons[i].onclick = () => {stage++; changeStage(); console.log(userResult)}
-}//отвечает за переход стадии
 
-const userResult = {
-	price: 0,
-	sizeAuto: [],
-	roominess: [],
-	style: false,
-	security: false,
-	speed: [],
-	carcaseType: [],
+//Определяем базовые значения критериев
+let price = 0;
+let speed = '';
+let style = false;
+let size = '';
 
-}
-
+let weight = 0;
+let resultRecomendation = '';
+let actulRecomendation = '';
+let explanationRecomendation = '';
 
 const priceInput = document.getElementById('priceInput');
-const markInput = document.getElementById('markInput');
-const modelInput = document.getElementById('modelInput');
-const carcaseTypeInput = document.getElementById('carcaseTypeInput');
+const priceBtn = document.getElementById('priceBtn');
+const group1 = document.getElementById('group1');
 
-let price;
-let mark;
-let model;
-let carcase;
+const speedInput = document.getElementById('speedInput');
+const speedBtn = document.getElementById('speedBtn');
+const group2 = document.getElementById('group2');
 
-const priceInputBtn = document.getElementById('priceInputBtn');
-const markInputBtn = document.getElementById('markInputBtn');
-const modelInputBtn = document.getElementById('modelInputBtn');
-const carcaseTypeInputBtn = document.getElementById('carcaseTypeInputBtn');
+const styleInput = document.getElementById('styleInput');
+const styleBtn = document.getElementById('styleBtn');
+const group3 = document.getElementById('group3');
 
-const priceDiv = document.getElementById('priceDiv');
-const markDiv = document.getElementById('markDiv');
-const modelDiv = document.getElementById('modelDiv');
-const carcaseTypeDiv = document.getElementById('carcaseTypeDiv');
+const sizeInput = document.getElementById('sizeInput');
+const sizeBtn = document.getElementById('sizeBtn');
+const group4 = document.getElementById('group4');
 
-let result = [];
+const resultGroup = document.getElementById('resultGroup');
+const resultRecomendationText = document.getElementById('resultRecomendationText');
+const actualRecomendationGroup = document.getElementById('actualRecomendationGroup');
+const actualRecomendationSpan = document.getElementById('actualRecomendationSpan');
+const explanationRecomendationSpan = document.getElementById('explanationRecomendationSpan');
+const reloadPageGroup = document.getElementById('reloadPageGroup');
+
+//Промежуточные переменные
+let tempCarArray = [];
 let maxPrice = 0;
-let card = document.getElementById('card');
-let cardContainer = document.getElementById('cardContainer');
-
-//Все с ценой
 
 
-// priceInputBtn.addEventListener('click', () => {
-// 	price = priceInput.value;
-// 	price = Number(price);
-	
-// 	// priceDiv.classList.add('display-none');
-// 	// markDiv.classList.remove('display-none');
 
-// 	for (let i = 0; i < data.length; i++) {
-// 		if (price > data[i].price) {
-// 			result.push(data[i]);
-// 		}
-// 	}
-// 	if (result.length != 0) {
-// 		for (let j = 0; j < result.length; j++) {
-// 		if (result.length > 0 && result[j].price > maxPrice) {
-// 			maxPrice = result[j].price;
-// 		}
-// 	}
-	
-// 	let actualCar = result.find((el) => el.price === maxPrice);
+priceBtn.addEventListener('click', () => {
+	price = priceInput.value;
+	price = Number(price);
 
-// 	card.querySelector('img').src = `${actualCar.image}`;
-// 	card.querySelector('h1').textContent = `${actualCar.mark} ${actualCar.model}`;
-// 	card.querySelector('p').textContent = `Тип кузова: ${actualCar.carcaseType}`;
-// 	priceRef = actualCar.price.toString().replace(/\B(?=(?:\d{3})*$)/g, ' ') + " рублей";
-// 	card.querySelector('h3').textContent = `Цена: ${priceRef}`;
-
-// 	priceDiv.classList.add('display-none');
-// 	cardContainer.classList.remove('display-none');
-	
-// 	}
-// 	else {
-// 		alert('Автомобилей не найдено!');
-// 	}
-	
-
-// });
-
-priceInputBtn.onclick = () => {
-	let auto = false
-	userResult.price = Number(priceInput.value);
+	//Отбор по самой высокой цене
 	for (let i = 0; i < data.length; i++) {
- 		if (userResult.price >= data[i].price) {
- 			console.log(userResult.price)
- 			stage++;
- 			changeStage();
- 			auto = true;
- 			break;
- 		}
- 	}
- 	if (!auto) alert('К несчастью, мы не можем подсказать вам автомобиль с указанной ценой. Пожалуйста, измените значение')
-
-
-}
-
-//Цена закончилась
-
-
-
-// markInputBtn.addEventListener('click', () => {
-// 	mark = markInput.value;
-// 	markDiv.classList.add('display-none');
-// 	modelDiv.classList.remove('display-none');
-// });
-
-// modelInputBtn.addEventListener('click', () => {
-// 	model = modelInput.value;
-// 	modelDiv.classList.add('display-none');
-// 	carcaseTypeDiv.classList.remove('display-none');
-// });
-
-// carcaseTypeInputBtn.addEventListener('click', () => {
-// 	carcase = carcaseTypeInput.value;
-// 	alert(price + ' \n' + mark + ' \n' + model + ' \n' + carcase);
-
-// 	for (var i=0; i < data.length; i++) {
-// 		if (data[i].price < price) {
-// 			result.push(data[i].mark + ' ' + data[i].model);
-// 		}
-// 	}
-
-// 	for (var j=0; j < result.length; j++) {
-// 		alert(result[j]);
-// 	}
-
-// });
-
-
-//Все со стилями
-const styleButtons = document.querySelectorAll('.styles__button');
-for (let i = 0; i < styleButtons.length; i++) {
-	styleButtons[i].addEventListener('click', (e) => {
-		e.target.textContent == 'Да'? userResult.style = true : userResult.style = false;
-	})
-}
-
-//Все с безопасностью
-const securityButtons = document.querySelectorAll('.security__button');
-for (let i = 0; i < styleButtons.length; i++) {
-	styleButtons[i].addEventListener('click', (e) => {
-		e.target.textContent == 'Да'? userResult.security = true : userResult.style = false;
-	})
-}
-
-
-//кнопка отменить все
-const pohui = document.querySelectorAll('.nastya__button');
-for (let i=0; i<pohui.length; i++) {
-	pohui[i].onclick = (e) => {
-		e.target.classList.toggle('choosed');
-		let parent = e.target.parentElement;
-		let paramButtons = parent.querySelectorAll('.param_button');
-		for(let i=0; i<paramButtons.length; i++) {
-			paramButtons[i].classList.remove('choosed');
+		if (price > data[i].price) {
+			tempCarArray.push(data[i]);
 		}
-		userResult[parent.dataset.attribute] = [];
+	}
+	if (tempCarArray.length != 0) 
+		{
+			for (let j = 0; j < tempCarArray.length; j++) {
+				tempCarArray[j].weight = 0;
+			if (tempCarArray.length > 0 && tempCarArray[j].price > maxPrice) 
+			{
+				maxPrice = tempCarArray[j].price;
+			}
+		}
+	}
+	else 
+	{
+		group1.classList.add('d-none');
+		reloadPageGroup.classList.remove('d-none');
+	}
 	
+	let actualCar = tempCarArray.find((el) => el.price === maxPrice);
 
+
+	carCardName.innerText = actualCar.mark + ' ' + actualCar.model;
+	carCardImg.src = `${actualCar.image}`;
+	carCardSpanPrice.innerText = actualCar.price.toString().replace(/\B(?=(?:\d{3})*$)/g, ' ') + " рублей";
+	// actualRecomendationSpan.innerText = actualCar.mark + ' ' + actualCar.model;
+	// explanationRecomendationSpan.innerText = 'Данный автомобиль самый дорогой из тех, которые подходят под Ваш бюджет.';
+	actualRecomendationGroup.classList.remove('d-none');
+
+
+	group1.classList.add('d-none');
+	group2.classList.remove('d-none');
+});
+
+speedBtn.addEventListener('click', () => {
+	speed = speedInput.value;
+
+	for (let i = 0; i < tempCarArray.length; i++) {
+		if (tempCarArray[i].speed === speed) 
+			{
+				//Если критерий совпадает с выбранным, добавляем вес(+1) всем подходящим по цене автомобилям.
+				tempCarArray[i].weight += 1;
+				// weight = 1;
+			}
 	}
-}
 
-//обычная кнопка выбора
-const paramButtons = document.querySelectorAll('.param_button');
-for (let i=0; i<paramButtons.length; i++) {
-	paramButtons[i].onclick = (e) => {
-		e.target.classList.toggle('choosed');
-		let parent = e.target.parentElement;
-		let nastyaButton = parent.querySelector('.nastya__button');
-		nastyaButton.classList.remove('choosed');
-		userResult[parent.dataset.attribute].push(e.target.dataset.atr);
+	maxPrice = 0;
+
+	for (let j = 0; j < tempCarArray.length; j++) {
+		//Пробегаемся по tempCarArray. Смотрим, где вес совпадает с 1. Если такого нет, выводим самый дорогой автомобиль с весом 0.
+		if (tempCarArray[j].weight === 1 && tempCarArray[j].price > maxPrice) 
+			{
+				maxPrice = tempCarArray[j].price;
+				actualCar = tempCarArray[j];
+			}
 	}
-}
 
-const finalButton = document.querySelector('.final__button');
-finalButton.onclick = () => {
-	stage++;
-	changeStage();
-	console.log(userResult.sizeAuto.indexOf('Medium'));
-	let finalAuto = 
-	data.filter((el) => 
-	el.style === userResult.style &&
-	 el.securityLevel === userResult.security &&
-	 userResult.sizeAuto.indexOf(el.sizeAuto) >= 0 &&
-	userResult.roominess.indexOf(el.roominess) >= 0 && 
-	userResult.speed.indexOf(el.speed) >= 0 &&
-	userResult.carcaseType.indexOf(el.carcaseType) >= 0 && 
-	userResult.price >= el.price
-	).sort(sortArray)[0];
-	const card = document.querySelector('.container-card');
-	card.querySelector('h1').textContent = `${finalAuto.mark} ${finalAuto.model}`;
-	card.querySelector('p').textContent += finalAuto.carcaseType;
-	card.querySelector('span').textContent = finalAuto.price;
-	card.querySelector('img').src=finalAuto.image;
+	//Если нет ни одного элемента с весом 1 - actualCar приравниваем к самому дорогому элементу с весом 0.
+	if (maxPrice === 0) {
+			for (let j = 0; j < tempCarArray.length; j++) {
+			//Пробегаемся по tempCarArray. Смотрим, где вес совпадает с 1. Если такого нет, выводим самый дорогой автомобиль с весом 0.
+			if (tempCarArray[j].weight === 0 && tempCarArray[j].price > maxPrice) 
+				{
+					maxPrice = tempCarArray[j].price;
+					actualCar = tempCarArray[j];
+				}
+		}
+	}
 
-}
+	carCardName.innerText = actualCar.mark + ' ' + actualCar.model;
+	carCardImg.src = `${actualCar.image}`;
+	carCardSpanPrice.innerText = actualCar.price.toString().replace(/\B(?=(?:\d{3})*$)/g, ' ') + " рублей";
+	// actualRecomendationSpan.innerText = actualCar.mark + ' ' + actualCar.model;
+	// explanationRecomendationSpan.innerText = 'Данный автомобиль самый дорогой из тех, которые подходят под Ваш бюджет и удовлетворяют выбранным критериям в количестве: ' + actualCar.weight;
 
-const beginDiv = document.getElementById('beginDiv');
-const buttonBegin = document.getElementById('buttonBegin');
 
-// buttonBegin.addEventListener('click', () => {
-// 	beginDiv.classList.add('display-none');
-// 	priceDiv.classList.remove('display-none');
-// });
 
+
+
+
+
+	group2.classList.add('d-none');
+	group3.classList.remove('d-none');
+});
+
+styleBtn.addEventListener('click', () => {
+	style = styleInput.value;
+
+	for (let i = 0; i < tempCarArray.length; i++) {
+		if (tempCarArray[i].style == style) 
+			{
+				//Если критерий совпадает с выбранным, добавляем вес(+1) всем подходящим по цене автомобилям.
+				tempCarArray[i].weight += 1;
+				// weight = 2;
+				
+			}
+	}
+
+	maxPrice = 0;
+
+	for (let j = 0; j < tempCarArray.length; j++) {
+		//Пробегаемся по tempCarArray. Смотрим, где вес совпадает с 2. Если такого нет, выводим самый дорогой автомобиль с весом 0.
+		if (tempCarArray[j].weight === 2 && tempCarArray[j].price > maxPrice) 
+			{
+				maxPrice = tempCarArray[j].price;
+				actualCar = tempCarArray[j];
+			}
+	}
+
+	if (maxPrice === 0) {
+			for (let j = 0; j < tempCarArray.length; j++) {
+			//Пробегаемся по tempCarArray. Смотрим, где вес совпадает с 1. Если такого нет, выводим самый дорогой автомобиль с весом 0.
+			if (tempCarArray[j].weight === 1 && tempCarArray[j].price > maxPrice) 
+				{
+					maxPrice = tempCarArray[j].price;
+					actualCar = tempCarArray[j];
+				}
+		}
+	}
+
+	if (maxPrice === 0) {
+			for (let j = 0; j < tempCarArray.length; j++) {
+			
+			if (tempCarArray[j].weight === 0 && tempCarArray[j].price > maxPrice) 
+				{
+					maxPrice = tempCarArray[j].price;
+					actualCar = tempCarArray[j];
+				}
+		}
+	}
+
+	carCardName.innerText = actualCar.mark + ' ' + actualCar.model;
+	carCardImg.src = `${actualCar.image}`;
+	carCardSpanPrice.innerText = actualCar.price.toString().replace(/\B(?=(?:\d{3})*$)/g, ' ') + " рублей";
+	// actualRecomendationSpan.innerText = actualCar.mark + ' ' + actualCar.model;
+	// explanationRecomendationSpan.innerText = 'Данный автомобиль самый дорогой из тех, которые подходят под Ваш бюджет и удовлетворяют выбранным критериям в количестве: ' + actualCar.weight;
+
+
+	group3.classList.add('d-none');
+	group4.classList.remove('d-none');
+});
+
+sizeBtn.addEventListener('click', () => {
+	size = sizeInput.value;
+
+	for (let i = 0; i < tempCarArray.length; i++) {
+		if (tempCarArray[i].sizeAuto == size) 
+			{
+				//Если критерий совпадает с выбранным, добавляем вес(+1) всем подходящим по цене автомобилям.
+				tempCarArray[i].weight += 1;
+				// weight = 2;
+			}
+	}
+
+	maxPrice = 0;
+
+	for (let j = 0; j < tempCarArray.length; j++) {
+		//Пробегаемся по tempCarArray. Смотрим, где вес совпадает с 2. Если такого нет, выводим самый дорогой автомобиль с весом 0.
+		if (tempCarArray[j].weight === 3 && tempCarArray[j].price > maxPrice) 
+			{
+				maxPrice = tempCarArray[j].price;
+				actualCar = tempCarArray[j];
+
+				// alert(tempCarArray[j].mark + ' ' + tempCarArray[j].model + ' ' + tempCarArray[j].weight);
+			}
+	}
+
+	if (maxPrice === 0) {
+			for (let j = 0; j < tempCarArray.length; j++) {
+			//Пробегаемся по tempCarArray. Смотрим, где вес совпадает с 1. Если такого нет, выводим самый дорогой автомобиль с весом 0.
+			if (tempCarArray[j].weight === 2 && tempCarArray[j].price > maxPrice) 
+				{
+					maxPrice = tempCarArray[j].price;
+					actualCar = tempCarArray[j];
+
+					// alert(tempCarArray[j].mark + ' ' + tempCarArray[j].model + ' ' + tempCarArray[j].weight);
+				}
+		}
+	}
+
+	if (maxPrice === 0) {
+			for (let j = 0; j < tempCarArray.length; j++) {
+			//Пробегаемся по tempCarArray. Смотрим, где вес совпадает с 1. Если такого нет, выводим самый дорогой автомобиль с весом 0.
+			if (tempCarArray[j].weight === 1 && tempCarArray[j].price > maxPrice) 
+				{
+					maxPrice = tempCarArray[j].price;
+					actualCar = tempCarArray[j];
+
+					// alert(tempCarArray[j].mark + ' ' + tempCarArray[j].model + ' ' + tempCarArray[j].weight);
+				}
+		}
+	}
+
+	if (maxPrice === 0) {
+			for (let j = 0; j < tempCarArray.length; j++) {
+			
+			if (tempCarArray[j].weight === 0 && tempCarArray[j].price > maxPrice) 
+				{
+					maxPrice = tempCarArray[j].price;
+					actualCar = tempCarArray[j];
+				}
+		}
+	}
+
+	// alert('Вес actualCar:' + actualCar.weight);
+
+
+	carCardName.innerText = actualCar.mark + ' ' + actualCar.model;
+	carCardImg.src = `${actualCar.image}`;
+	carCardSpanPrice.innerText = actualCar.price;
+	// actualRecomendationSpan.innerText = actualCar.mark + ' ' + actualCar.model;
+	// explanationRecomendationSpan.innerText = 'Данный автомобиль самый дорогой из тех, которые подходят под Ваш бюджет и удовлетворяют выбранным критериям в количестве: ' + actualCar.weight;
+
+
+
+
+
+
+
+
+
+
+	group4.classList.add('d-none');
+
+	// resultRecomendationText.innerText = actualCar.mark + ' ' + actualCar.model;
+	resultCarCardName.innerText = actualCar.mark + ' ' + actualCar.model;
+	resultCarCardImg.src = `${actualCar.image}`;
+	resultCarCardSpanPrice.innerText = actualCar.price.toString().replace(/\B(?=(?:\d{3})*$)/g, ' ') + " рублей";
+
+
+	resultGroup.classList.remove('d-none');
+	actualRecomendationGroup.classList.add('d-none');
+});
