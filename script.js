@@ -1,3 +1,8 @@
+window.onload = () => {
+	fetch("http://antihach.pythonanywhere.com/").then(res => console.log(res));
+}
+
+
 const data = [
 	{
 		price: 667310,
